@@ -955,7 +955,7 @@ int64 GetProofOfWorkReward(int nHeight, int64 nFees, uint256 prevHash)
     int64 nSubsidy = MAX_MINT_PROOF_OF_WORK;
     if(nHeight == 1)
     {
-        nSubsidy = 19800000 * COIN;
+        nSubsidy = 198000000 * COIN;
     }
     else
     {
