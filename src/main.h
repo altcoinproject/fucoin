@@ -34,7 +34,7 @@ static const unsigned int MAX_INV_SZ = 50000;
 static const int64 MIN_TX_FEE = 100000;
 static const int64 MIN_RELAY_TX_FEE = MIN_TX_FEE;
 static const int64 MAX_MONEY = std::numeric_limits<int64_t>::max();
-static const int64 MAX_MINT_PROOF_OF_WORK = 1980000000 * COIN;
+static const int64 MAX_MINT_PROOF_OF_WORK = 199000000 * COIN;
 static const int64 MAX_MINT_PROOF_OF_WORK_LEGACY = 1 * COIN;
 static const int64 MAX_MINT_PROOF_OF_STAKE = 0.1 * CENT;//Interests
 
