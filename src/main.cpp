@@ -959,7 +959,7 @@ int64 GetProofOfWorkReward(int nHeight, int64 nFees, uint256 prevHash)
     }
     else
     {
-        nSubsidy = 0 * COIN;
+        nSubsidy = MIN_TXOUT_AMOUNT;
     }
     return nSubsidy + nFees;
 }
