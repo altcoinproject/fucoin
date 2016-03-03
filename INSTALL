@@ -1,0 +1,9 @@
+Building fucoin
+
+See doc/readme-qt.rst for instructions on building fucoin QT,
+the intended-for-end-users, nice-graphical-interface, reference
+implementation of fucoin.
+
+See doc/build-*.txt for instructions on building fucoind,
+the intended-for-services, no-graphical-interface, reference
+implementation of fucoin.
