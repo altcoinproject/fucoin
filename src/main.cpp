@@ -1086,8 +1086,8 @@ bool CheckProofOfWork(uint256 hash, unsigned int nBits)
     bnTarget.SetCompact(nBits);
 
     // Check range
-    if (bnTarget <= 0 || bnTarget > bnProofOfWorkLimit)
-        return error("CheckProofOfWork() : nBits below minimum work");
+    /*if (bnTarget <= 0 || bnTarget > bnProofOfWorkLimit)
+        return error("CheckProofOfWork() : nBits below minimum work");*/
 
     // Check proof of work matches claimed amount
     if (hash > bnTarget.getuint256())
@@ -2008,9 +2008,19 @@ bool CBlock::CheckBlock(bool fCheckPOW, bool fCheckMerkleRoot) const
     // These are checks that are independent of context
     // that can be verified before saving an orphan block.
 
+    // --- patch start
+        // blacklist block 1312
+    //0000003d661e60ebc84bb4cdff627a7b678008f25b5f082199758a9719a6ec40
+       /*if (GetHash() == uint256("0x0000003d661e60ebc84bb4cdff627a7b678008f25b5f082199758a9719a6ec40"))
+            return error("CheckBlock() : hash == 0x0000003d661e60ebc84bb4cdff627a7b678008f25b5f082199758a9719a6ec40");*/
+        // --- patch end
+
+
     // Size limits
     if (vtx.empty() || vtx.size() > MAX_BLOCK_SIZE || ::GetSerializeSize(*this, SER_NETWORK, PROTOCOL_VERSION) > MAX_BLOCK_SIZE)
         return DoS(100, error("CheckBlock() : size limits failed"));
+
+
 
     // Check proof of work matches claimed amount
     if (fCheckPOW && IsProofOfWork() && !CheckProofOfWork(GetHash(), nBits))
@@ -2190,6 +2200,7 @@ bool ProcessBlock(CNode* pfrom, CBlock* pblock)
     if (pblock->IsProofOfStake() && setStakeSeen.count(pblock->GetProofOfStake()) && !mapOrphanBlocksByPrev.count(hash) && !Checkpoints::WantedByPendingSyncCheckpoint(hash))
         return error("ProcessBlock() : duplicate proof-of-stake (%s, %d) for block %s", pblock->GetProofOfStake().first.ToString().c_str(), pblock->GetProofOfStake().second, hash.ToString().c_str());
 
+    //if(pblock->)
     // Preliminary checks
     if (!pblock->CheckBlock())
         return error("ProcessBlock() : CheckBlock FAILED");
@@ -2283,6 +2294,7 @@ bool ProcessBlock(CNode* pfrom, CBlock* pblock)
     }
 
     printf("ProcessBlock: ACCEPTED\n");
+    printf("Block Timestamp:%u\n",pblock->nTime);
 
     // ppcoin: if responsible for sync-checkpoint send it
     if (pfrom && !CSyncCheckpoint::strMasterPrivKey.empty())
