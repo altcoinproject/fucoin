@@ -224,22 +224,90 @@ void ThreadIRCSeed2(void* parg)
 
     while (!fShutdown)
     {
-        CService addrConnect("188.122.74.140", 6667); // eu.undernet.org
 
-        CService addrIRC("irc.rizon.net", 6667, true);
+        CService addrConnect("92.243.23.21", 6667); // irc.lfnet.org
+
+        CService addrIRC("irc.lfnet.org", 6667, true);
         if (addrIRC.IsValid())
             addrConnect = addrIRC;
 
         SOCKET hSocket;
         if (!ConnectSocket(addrConnect, hSocket))
         {
-            printf("IRC connect failed\n");
-            nErrorWait = nErrorWait * 11 / 10;
-            if (Wait(nErrorWait += 60))
-                continue;
-            else
-                return;
+            addrConnect = CService("irc.rizon.net", 6667, true);
+            if (!ConnectSocket(addrConnect, hSocket))
+            {
+                addrConnect = CService("pelican.heliacal.net", 6667, true);
+                if (!ConnectSocket(addrConnect, hSocket))
+                {
+                    addrConnect = CService("irc.shaw.ca", 6667, true);
+                    if (!ConnectSocket(addrConnect, hSocket))
+                    {
+                        addrConnect = CService("irc.du.se", 6667, true);
+                        if (!ConnectSocket(addrConnect, hSocket))
+                        {
+                            addrConnect = CService("irc.efnet.pl", 6667, true);
+                            if (!ConnectSocket(addrConnect, hSocket))
+                            {
+                                addrConnect = CService("irc.mzima.net", 6667, true);
+                                if (!ConnectSocket(addrConnect, hSocket))
+                                {
+                                    addrConnect = CService("rc.Prison.NET", 6667, true);
+                                    if (!ConnectSocket(addrConnect, hSocket))
+                                    {
+                                        addrConnect = CService("irc.servercentral.net", 6667, true);
+                                        if (!ConnectSocket(addrConnect, hSocket))
+                                        {
+                                            addrConnect = CService("Prothid.NY.US.GameSurge.Net", 6667, true);
+                                            if (!ConnectSocket(addrConnect, hSocket))
+                                            {
+                                                addrConnect = CService("TAL.DE.EU.GameSurge.net", 6667, true);
+                                                if (!ConnectSocket(addrConnect, hSocket))
+                                                {
+                                                    addrConnect = CService("ix1.undernet.org", 6667, true);
+                                                    if (!ConnectSocket(addrConnect, hSocket))
+                                                    {
+                                                        addrConnect = CService("ix2.undernet.org", 6667, true);
+                                                        if (!ConnectSocket(addrConnect, hSocket))
+                                                        {
+                                                            addrConnect = CService("irc.de.ircnet.net", 6667, true);
+                                                            if (!ConnectSocket(addrConnect, hSocket))
+                                                            {
+                                                                addrConnect = CService("Chicago.IL.US.Undernet.org", 6667, true);
+                                                                if (!ConnectSocket(addrConnect, hSocket))
+                                                                {
+                                                                    addrConnect = CService("Budapest.HU.EU.UnderNet.org", 6667, true);
+                                                                    if (!ConnectSocket(addrConnect, hSocket))
+                                                                    {
+                                                                        addrConnect = CService("Bucharest.RO.EU.Undernet.Org", 6667, true);
+                                                                        if (!ConnectSocket(addrConnect, hSocket))
+                                                                        {
+                                                                            printf("IRC connect failed\n");
+                                                                            nErrorWait = nErrorWait * 11 / 10;
+                                                                            if (Wait(nErrorWait += 60))
+                                                                                continue;
+                                                                            else
+                                                                                return;
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                }
+
+            }
         }
+
 
         if (!RecvUntil(hSocket, "Found your hostname", "using your IP address instead", "Couldn't look up your hostname", "ignoring hostname"))
         {
