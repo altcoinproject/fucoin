@@ -2012,8 +2012,8 @@ bool CBlock::CheckBlock(bool fCheckPOW, bool fCheckMerkleRoot) const
         // blacklist block 1312
     //0000003d661e60ebc84bb4cdff627a7b678008f25b5f082199758a9719a6ec40
 
-       if(GetHash() == uint256("0x00000085b721db9d085b9a378d029dc0a41b41a6f30ffbea3fdcf1dd8ff2c36f"))
-           return error("CheckBlock() :Hash == 0x00000085b721db9d085b9a378d029dc0a41b41a6f30ffbea3fdcf1dd8ff2c36f");
+       if(GetHash() == uint256("0x000000258ab3a74fe10ec8df4f4efa26d3a57651e99b695b529a0f1b12379cc1"))
+           return error("CheckBlock() :Hash == 0x000000258ab3a74fe10ec8df4f4efa26d3a57651e99b695b529a0f1b12379cc1");
         // --- patch end
 
 
